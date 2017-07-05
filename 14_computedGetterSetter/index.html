@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+	<div id="example">
+		<p>Origin message ---- {{message}}</p>
+		<p>Computed reverse message ---- {{reverseMessage}}</p>
+	</div>
+
+	<div id="demo1">{{fullName}}</div>
+<script type="text/javascript">
+var vm = new Vue({
+	el:'#example',
+	data:{
+		message:'Hello'
+	},
+	computed:{
+		reverseMessage:function(){
+			return this.message.split('').reverse().join('');
+		}
+	}
+});
+
+var demo1 = new Vue({
+	el: '#demo1',
+	data: {
+		firstName: 'Foo',
+		lastName: 'Bar'
+	},
+	computed:{
+		fullName:{
+			get:function(){
+				return this.firstName+' '+this.lastName;
+			},
+			set:function(newValue){
+				var names = newValue.split(' ');
+				this.firstName = names[0];
+				this.lastName = names[names.length - 1 ];
+			}
+		}
+	}
+});
+console.log(demo1.fullName);
+demo1.fullName = 'bai JiaHao';
+console.log(demo1.fullName);
+console.log(demo1.firstName);
+console.log(demo1.lastName);
+</script>
+</body>
+</html>
