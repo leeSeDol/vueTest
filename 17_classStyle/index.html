@@ -5,19 +5,43 @@
 	<title>index</title>
 <style>
 	
-
 </style>
 <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
-	<div id="test" class="static" v-bind:class = "text-danger :hasError , hover:isHover"></div>
-	
+	<div id="test" class="static" v-bind:class = "{ 'text-danger' :hasError , hover:isHover }">喵</div>
+	<div id="test2" class="static" v-bind:class = "classObject">喵喵</div>
+	<div id="test3" class="static" v-bind:class = "classObject">喵喵喵</div>
 <script type="text/javascript">
 var test = new Vue({
 	el:'#test',
 	data:{
-		hasError:'false',
-		isHover:'true'
+		hasError:false,
+		isHover:true
+	}
+});
+var test2 = new Vue({
+	el:'#test2',
+	data:{
+		classObject : {
+			hover:true,
+			'text-danger':true
+		}
+	}
+});
+var test3 = new Vue({
+	el:'#test3',
+	data:{
+		isActive:true,
+		error:null
+	},
+	computed:{
+		classObject:function(){
+			return {
+				active: this.isActive &&  !this.error,
+				'text-danger': this.error && this.error.type === 'fatal'
+			}
+		}
 	}
 });
 </script>
