@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+<style>
+	
+
+</style>
+<script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+	<div id="test" class="static" v-bind:class = "text-danger :hasError , hover:isHover"></div>
+	
+<script type="text/javascript">
+var test = new Vue({
+	el:'#test',
+	data:{
+		hasError:'false',
+		isHover:'true'
+	}
+});
+</script>
+</body>
+</html>
