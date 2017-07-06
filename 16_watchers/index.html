@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Watchers</title>
+	<script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+	<div id="watch-example">
+		<p>
+			Ask a yes/no question.
+			<input type="text" v-model = "question">
+		</p>
+		<p>{{answer}}</p>
+	</div>
+
+<script type="text/javascript">
+	var watchExampleVm = new Vue({
+		el:'#watch-example',
+		data:{
+			question:'',
+			answer:'I cannot give you an answer until you ask a question.'
+		},
+		watch:{
+			question:function(newQuestion){
+				this.answer = 'wating for you stop typing...';
+			}
+		}
+	});
+
+</script>
+</body>
+</html>
