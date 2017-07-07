@@ -9,6 +9,7 @@
 <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
+	<!-- 绑定html的class -->
 	<div id="test" class="static" v-bind:class = "{ 'text-danger' :hasError , hover:isHover }">喵</div>
 	<div id="test2" class="static" v-bind:class = "classObject">喵喵</div>
 	<div id="test3" class="static" v-bind:class = "classObject">喵喵喵</div>
@@ -18,6 +19,12 @@
 	<div id="test6" v-bind:class = "[{active : isActive } , errorClass]">喵喵喵喵喵喵</div>
 
 	<my-component id = "example" class = "bazz boo"></my-component>
+	<my-component id = "example1" v-bind:class = "{active:isActive , errorClass}"></my-component>
+
+	<!-- 绑定内联样式 -->
+	<div id="testStyle1" v-bind:style = "{ color:activeColor , fontSize:fontSize +'px' }">雅雅</div>
+	<div id="testStyle2" v-bind:style = "styleObject">喵</div>
+	<div id="testStyle3" v-bind:style = "[first,last]">喵喵</div>
 <script type="text/javascript">
 var test = new Vue({
 	el:'#test',
@@ -46,7 +53,7 @@ var test3 = new Vue({
 		classObject:function(){
 			return {
 				active: this.isActive &&  !this.error,
-				'text-danger': this.error && this.error.type === 'fatal'
+				'text-danger' : this.error && this.error.type === 'fatal'
 			}
 		}
 	}
@@ -81,6 +88,43 @@ Vue.component('my-component',{
 });
 new Vue({
 	el:'#example'
+});
+new Vue({
+	el:'#example1',
+	data:{
+		isActive:true,
+		errorClass:true
+	}
+});	
+
+var testStyle1 = new Vue({
+	el:'#testStyle1',
+	data:{
+		activeColor:'#c96',
+		fontSize:34	
+	}
+});
+var testStyle2 = new Vue({
+	el:'#testStyle2',
+	data:{
+		styleObject : {
+			color:'#c96',
+			fontSize:'23px'
+		}
+	}
+});
+var testStyle3 = new Vue({
+	el:'#testStyle3',
+	data:{
+		first:{
+			color:'#08b',
+			border:'1px solid #085'
+		},
+		last:{
+			color:'red',
+			border:'1px solid #08b'
+		}
+	}
 });
 </script>
 </body>
