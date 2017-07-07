@@ -14,6 +14,10 @@
 	<div id="test3" class="static" v-bind:class = "classObject">喵喵喵</div>
 
 	<div id="test4" v-bind:class = "[activeClass,errorClass]">喵喵喵喵</div>
+	<div id="test5" v-bind:class = "[isActive ? activeClass : '' , errorClass]">喵喵喵喵喵</div>
+	<div id="test6" v-bind:class = "[{active : isActive } , errorClass]">喵喵喵喵喵喵</div>
+
+	<my-component id = "example" class = "bazz boo"></my-component>
 <script type="text/javascript">
 var test = new Vue({
 	el:'#test',
@@ -54,6 +58,29 @@ var test4 = new Vue({
 		activeClass:'active',
 		errorClass:'text-danger'
 	}
+});
+/*数组语法(三元表达式)*/
+var test5 = new Vue({
+	el:'#test5',
+	data:{
+		isActive:true,
+		errorClass:'error',
+		activeClass:'active'
+	}
+});
+var test6 = new Vue({
+	el:'#test6',
+	data:{
+		isActive:true,
+		errorClass:'error'
+	}
+});
+/*用在组件上*/
+Vue.component('my-component',{
+	template:'<p class = "foo bar">component1</p>'
+});
+new Vue({
+	el:'#example'
 });
 </script>
 </body>
