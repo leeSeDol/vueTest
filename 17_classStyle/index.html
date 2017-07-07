@@ -12,6 +12,8 @@
 	<div id="test" class="static" v-bind:class = "{ 'text-danger' :hasError , hover:isHover }">喵</div>
 	<div id="test2" class="static" v-bind:class = "classObject">喵喵</div>
 	<div id="test3" class="static" v-bind:class = "classObject">喵喵喵</div>
+
+	<div id="test4" v-bind:class = "[activeClass,errorClass]">喵喵喵喵</div>
 <script type="text/javascript">
 var test = new Vue({
 	el:'#test',
@@ -29,6 +31,7 @@ var test2 = new Vue({
 		}
 	}
 });
+/*对象语法*/
 var test3 = new Vue({
 	el:'#test3',
 	data:{
@@ -42,6 +45,14 @@ var test3 = new Vue({
 				'text-danger': this.error && this.error.type === 'fatal'
 			}
 		}
+	}
+});
+/*数组语法*/
+var test4 = new Vue({
+	el:'#test4',
+	data:{
+		activeClass:'active',
+		errorClass:'text-danger'
 	}
 });
 </script>
