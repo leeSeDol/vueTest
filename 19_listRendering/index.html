@@ -35,6 +35,21 @@
 	</div>
 </div>
 
+<div id="example5">
+	<span v-for="n in 10">{{ n }} </span>
+</div>
+
+<ul id="example6">
+	<li v-for="todo in todos" v-if="!todo.isComplete">
+  		{{ todo.value }}
+	</li>
+</ul>
+
+<ul id="example7" v-if="shouldRenderTodos">
+	<li v-for="todo in todos">
+		{{todo }}
+	</li>
+</ul>
 <script type="text/javascript">
 var example1 = new Vue({
 	el:'#example1',
@@ -49,6 +64,7 @@ var example1 = new Vue({
 		]
 	}
 });
+
 var example2 = new Vue({
 	el:'#example2',
 	data:{
@@ -61,7 +77,7 @@ var example2 = new Vue({
 });
 
 var repeatObject = new Vue({
-el:'#repeat-object',
+	el:'#repeat-object',
 	data:{
 		object:{
 			firstName:'John',
@@ -81,6 +97,7 @@ var example3 = new Vue({
 		}
 	}
 });
+
 var example4 = new Vue({
 	el:'#example4',
 	data:{
@@ -91,6 +108,41 @@ var example4 = new Vue({
 		}
 	}
 });
+
+var example5 = new Vue({
+	el:'#example5'
+});
+
+var example6 = new Vue({
+	el:'#example6',
+	data:{
+		todos:[
+			{
+				value:1,
+				isComplete:false
+			},
+			{
+				value:2,
+				isComplete:false
+			},
+			{
+				value:3,
+				isComplete:true
+			}
+		]		
+	}
+});
+
+var example7 = new Vue({
+	el:'#example7',
+	data:{
+		shouldRenderTodos:true,//值为false则该ul消失
+		todos:[
+			1,2,3
+		]
+	}
+});
+
 </script>
 </body>
 </html>
