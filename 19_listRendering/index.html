@@ -31,7 +31,7 @@
 
 <div id="example4">
 	<div v-for="(value , key , index) in object">
-		{{index+1}}.  {{key}}:{{value}}
+		{{index+1}}. {{key}}:{{value}}
 	</div>
 </div>
 
@@ -49,6 +49,10 @@
 	<li v-for="todo in todos">
 		{{todo }}
 	</li>
+</ul>
+
+<ul id="example8">
+	<li v-for=" n in evenNumbers ">{{n}}</li>
 </ul>
 <script type="text/javascript">
 var example1 = new Vue({
@@ -129,7 +133,7 @@ var example6 = new Vue({
 				value:3,
 				isComplete:true
 			}
-		]		
+		]	
 	}
 });
 
@@ -140,6 +144,20 @@ var example7 = new Vue({
 		todos:[
 			1,2,3
 		]
+	}
+});
+
+var example8 = new Vue({
+	el:'#example8',
+	data:{
+		numbers:[1,2,3,4,5,6]
+	},
+	computed:{
+		evenNumbers:function(){
+			return this.numbers.filter(function(number){
+				return number % 2 === 0;
+			});
+		}
 	}
 });
 
