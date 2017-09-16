@@ -3,38 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<title>index</title>
-	<script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="style.css">
+	<script src="vue.js"></script>
 </head>
 <body>
-	<div id="app7">
-		<ol>
-			<todo-item v-for=" item in groceryList "
-					   v-bind:todo = "item"
-					   v-bind:key = "item.id">
-			</todo-item>
-		</ol>
+	<div id="app">
+		<ul>
+			<todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+		</ul>		
 	</div>
-	
-<script type="text/javascript">
+<script>
 	Vue.component('todo-item',{
-		props:['todo'],
-		template:'<li>{{todo.text}}</li>'
+		props:[ 'todo' ],
+		template:'<li>{{ todo.text }}</li>'
 	});
-	var app7 = new Vue({
-		el:'#app7',
+	var app = new Vue({
+		el:'#app',
+		components:[ 'todo-item' ],
+		
 		data:{
 			groceryList:[
 				{
-					id:0,
-					text:'蔬菜'
+					text:'code',
+					id:1
 				},
 				{
-					id:1,
-					text:'水果'
+					text:'walk',
+					id:2
 				},
 				{
-					id:2,
-					text:'其他东西'
+					text:'play',
+					id:3
 				}
 			]
 		}
