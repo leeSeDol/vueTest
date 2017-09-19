@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<!-- 传给v-bind:class一个对象，动态的添加class -->
+	<div id="demo" class="static" v-bind:class="{ active:isActive , 'text-danger':hasError }"></div>
+	<!-- 绑定对象classObject -->
+	<div id="demo2" v-bind:class="classObject"></div>
+	<!-- classObject的计算属性 -->
+	<div id="demo3" v-bind:class="classObject"></div>
+
+	<div id="demo4" v-bind:class="[ activeClass , errorClass ]"></div>
+	<!-- 在数组中根据条件切换class -->
+	<div id="demo5" v-bind:class="[ errorClass , { active:isActive } ]"></div>
+	
+	<!-- 用在组件中 -->
+	<my-component id="demo6" v-bind:class="{ active:isActive }"></my-component>
+
+	<!-- 绑定内联样式 -->
+	<div id="demo7" v-bind:style="styleObject">baiJiaHao</div>
+	<div id="demo8" v-bind:style=" { color:activeColor , fontSize: fontSize +'px' } ">baiBaiBao</div>
+	<!-- 数组语法 -->
+	<div id="demo9" v-bind:style="[baseStyles , overStyles]">header</div>
+<script type="text/javascript">
+var demo = new Vue({
+	el:'#demo',
+	data:{
+		isActive:true,
+		hasError:true
+	}
+});
+var demo2 = new Vue({
+	el:'#demo2',
+	data:{
+		classObject:{
+			active:true,
+			'text-danger':true
+		}
+	}
+});
+
+var demo3 = new Vue({
+	el:'#demo3',
+	data:{
+		isActive:true,
+		error:null
+	},
+	computed:{
+		classObject:function(){
+			return {
+				active:this.isActive && !this.error,
+				'text-danger':!this.error
+			}
+		}
+	}
+});
+
+var demo4 = new Vue({
+	el:'#demo4',
+	data:{
+		activeClass:'active',
+		errorClass:'text-danger'
+	}
+});
+
+var demo5 = new Vue({
+	el:'#demo5',
+	data:{
+		errorClass:'error',
+		isActive:true
+	}
+});
+
+Vue.component('my-component',{
+	template:'<p class="foo bar">Hi solider</p>'
+});
+var demo6 = new Vue({
+	el:'#demo6',
+	data:{
+		isActive:true
+	}
+});
+
+var demo7 = new Vue({
+	el:'#demo7',
+	data:{
+		styleObject:{
+			color:'#fc0',
+			fontSize:'13px'
+		}
+	}
+});
+
+var demo8 = new Vue({
+	el:'#demo8',
+	data:{
+		activeColor:'#c31',
+		fontSize:13
+	}
+});
+
+var demo9 = new Vue({
+	el:'#demo9',
+	data:{
+		baseStyles:{
+			color:'#31cccc',
+			fontSize:'15px'
+		},
+		overStyles:{
+			color:'#cc0',
+			textAlign:'center'
+		}
+	}
+});
+</script>
+</body>
+</html>
