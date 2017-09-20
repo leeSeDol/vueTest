@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="demo1">
+		<h3 v-if="ok">Yes</h3>
+		<h2 v-else>No</h2>
+	</div>
+	<!-- 多个元素应用template -->
+	<div id="demo2">
+		<template v-if="ok">
+			<h1>Title</h1>
+			<p>Paragraph1</p>
+			<p>Paragraph1</p>
+		</template>
+		<template v-else>
+			<h2>Title2</h2>
+		</template>	
+	</div>
+	<!-- v-else-if -->
+	<div id="demo3">
+		<div v-if=" type === 'A' ">
+			<p>A</p>
+		</div>
+		<div v-else-if=" type === 'B' ">
+			<p>B</p>
+		</div>
+		<div v-else-if=" type === 'C' ">
+			<p>C</p>
+		</div>
+	</div>
+	<!-- 用key管理可复用的元素,下面的例子是无key的 -->
+	<div id="demo4">
+		<template v-if="loginType === 'username' ">
+			<label>Username</label>
+			<input type="text" placeholder="Enter your username">
+		</template>
+		<template  v-else>
+			<label>Email</label>
+			<input type="text" placeholder="Enter your email address">
+		</template>
+		<input type="button" value="click to change" v-on:click="changeLoginType">	
+	</div>
+
+	<!-- 用key管理可复用的元素,下面的例子是有key的 -->
+	<div id="demo5">
+		<template v-if="loginType === 'username' ">
+			<label>Username</label>
+			<input type="text" placeholder="Enter your username" key="username-input">
+		</template>
+		<template  v-else>
+			<label>Email</label>
+			<input type="text" placeholder="Enter your email address" key="email-input">
+		</template>
+		<input type="button" value="click to change" v-on:click="changeLoginType">		
+	</div>
+<script type="text/javascript">
+var demo1 = new Vue({
+	el:'#demo1',
+	data:{
+		ok:true
+	}
+});
+
+var demo2 = new Vue({
+	el:'#demo2',
+	data:{
+		ok:true
+	}
+});
+
+var demo3 = new Vue({
+	el:'#demo3',
+	data:{
+		type:'B'
+	}
+});
+
+var demo4 = new Vue({
+	el:'#demo4',
+	data:{
+		loginType:'username'
+	},
+	methods:{
+		changeLoginType:function(){
+			this.loginType = 'email';
+		}
+	}
+});
+
+var demo5 = new Vue({
+	el:'#demo5',
+	data:{
+		loginType:'username'
+	},
+	methods:{
+		changeLoginType:function(){
+			this.loginType = 'email';
+		}
+	}
+});
+</script>
+</body>
+</html>
