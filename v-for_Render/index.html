@@ -1,0 +1,160 @@
+<!-- v-for与v-if处于同一节点时,v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<!-- v-for还支持一个可选的第二个参数为当前项的索引。 -->
+	<div id="example1">
+		<ul>
+			<li v-for=" ( item , index ) in items ">
+				{{parentMessage}} - {{ index }} - {{item.message}}
+			</li>
+		</ul>
+	</div>
+	
+	<!-- 一个对象的v-for -->
+	<div id="example2">
+		<div v-for=" value in object ">
+			{{value}}
+		</div>
+	</div>
+
+	<!-- 第二个参数为键名 -->
+	<div id="example3">
+		<div v-for="( value , key ) in object">
+			{{key}}: {{value}}
+		</div>
+	</div>
+
+	<!-- 第三个参数提供索引 -->
+	<div id="example4">
+		<div v-for="(value , key , index) in object">
+			{{index}}.{{key}}.{{value}}
+		</div>
+	</div>
+
+	<div id="example5">
+		<div v-for="value in userProfile">
+			{{ value }}
+		</div>
+	</div>
+
+	<div id="example6">
+		<ul>
+			<li v-for="n in evenNumbers">{{ n }}</li>
+		</ul>
+	</div>
+
+	<div id="example7">
+		<ul>
+			<li v-for=" n in even(numbers) ">{{ n }}</li>
+		</ul>
+		<ul>
+			<li v-for=" n in 10">{{n}}</li>
+		</ul>
+	</div>
+<script type="text/javascript">
+var demo1 = new Vue({
+	el:'#example1',
+	data:{
+		parentMessage:' Parent ',
+		items:[
+			{ message: 'Foo' },
+			{ message: 'Bar' }
+		]
+	}
+});
+//用filter方法选择message中含有Foo的item，替换原数组
+/*demo1.items = demo1.items.filter(function(item){
+	return item.message.match(/Foo/);
+});*/
+
+//这两行都实现利用索引直接设置一个项
+Vue.set( demo1.items , 0 , {message:'bai'} );
+demo1.items.splice(1,1,{message:'Jia'});
+
+demo1.items.splice(1,1);
+
+
+var demo2 = new Vue({
+	el:'#example2',
+	data:{
+		object:{
+			firstName:'John',
+			lastName:'Doe',
+			age:30
+		}
+	}
+});
+
+var demo3 = new Vue({
+	el:'#example3',
+	data:{
+		object:{
+			firstName:'John',
+			lastName:'Doe',
+			age:30
+		}
+	}
+});
+
+var demo4 = new Vue({
+	el:'#example4',
+	data:{
+		object:{
+			firstName:'John',
+			lastName:'Doe',
+			age:30
+		}
+	}
+})
+
+var demo5 = new Vue({
+	el:'#example5',
+	data:{
+		userProfile:{
+			name:'baiBai',
+			address:'1 street'
+		}
+	}
+});
+Vue.set(demo5.userProfile,'age',22);
+demo5.$set( demo5.userProfile , 'sex' , 'women' );
+demo5.userProfile = Object.assign( {} , demo5.userProfile , {
+	favoriteColor:'Vue Green'
+});
+
+var demo6 = new Vue({
+	el:'#example6',
+	data:{
+		numbers:[1,2,3,4,5,6,7,8,9,10]
+	},
+	computed:{
+		evenNumbers:function(){
+			return this.numbers.filter(function(number){
+				return number % 2 ===1
+			})
+		}
+	}
+});
+
+var demo7 = new Vue({
+	el:'#example7',
+	data:{
+		numbers:[1,2,3,4,5,6,7,8,9,10]
+	},
+	methods:{
+		even:function( numbers ){
+			return this.numbers.filter(function(number){
+				return number % 2 === 0;
+			});
+		}
+	}
+});
+</script>
+</body>
+</html>
