@@ -33,6 +33,50 @@
 	<span>Picked: {{ picked }}</span>
 </div>
 
+<div id="demo4">
+	<select name="" id="" v-model="selected">
+		<option value="" disabled>请选择</option>
+		<option>A</option>
+		<option>B</option>
+		<option>C</option>
+	</select>
+	<span> Selected : {{selected}} </span>
+</div>
+
+<div id="demo5">
+	<select name="" id="" multiple v-model="selected">
+		<option disabled> 请选择 </option>
+		<option> A </option>
+		<option> B </option>
+		<option> C </option>
+	</select>
+	<span> Selected: {{selected}} </span>
+</div>
+
+<!-- 用v-for渲染 -->
+<div id="demo6">
+	<select v-model="selected" name="" id="">
+		<option v-for="option in options" v-bind:value="option.value">
+			{{ option.text }}
+		</option>
+	</select>
+	<span>{{ selected }}</span>
+</div>
+
+<div id="demo7">
+	<!-- 当选中时，`picked` 为字符串 "a" -->
+	<input type="radio" v-model="picked" value="a"><span>{{picked}}</span>
+	<!-- `toggle` 为 true 或 false -->
+	<input type="checkbox" v-model="toggle"><span>{{toggle}}</span>
+	<!-- 当选中时，`selected` 为字符串 "abc" -->
+	<select v-model="selected" name="" id="">
+		<option value="abc">ABC</option>
+	</select>
+	<span>{{selected}}</span>
+
+	<input type="checkbox" v-model="toggle2" v-bind:true-value="a" v-bind:false-value="b">
+	<span>{{toggle2}}</span>
+</div>
 <script type="text/javascript">
 var demo1 = new Vue({
 	el:'#demo1',
@@ -54,6 +98,45 @@ var demo3 = new Vue({
 		picked:''
 	}
 });
+
+var demo4 = new Vue({
+	el:'#demo4',
+	data:{
+		selected:''
+	}
+});
+
+var demo5 = new Vue({
+	el:'#demo5',
+	data:{
+		selected:[]
+	}
+});
+
+var demo6 = new Vue({
+	el:'#demo6',
+	data:{
+		selected:'A',
+		options:[
+			{ text:'One' , value:'A'},
+			{ text:'Two' , value:'B' },
+			{ text:'Three' , value:'C' }
+		]
+	}
+});
+
+var demo7 = new Vue({
+	el:'#demo7',
+	data:{
+		selected:'',
+		picked:'',
+		toggle:'',
+		toggle2:'yes',
+		a:'yes',
+		b:'no'
+	}
+});
+
 </script>
 </body>
 </html>
