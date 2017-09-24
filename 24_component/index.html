@@ -7,9 +7,7 @@
 </head>
 <body>
 <div id="demo1">
-	<my-component>
-		<child message="slider"></child>	
-	</my-component>
+	<my-component></my-component>
 </div>
 	
 <div id="demo2">
@@ -25,7 +23,7 @@
 </div>
 
 <div id="demo4">
-	
+	<child my-message="slider"></child>
 </div>
 <script>
 //demo1	
@@ -65,8 +63,14 @@ new Vue({
 
 //demo4
 Vue.component('child',{
-	props:['message'],
-	template:'<span>{{ message }}</span>'
+	props:['myMessage'],
+	template:'<span>{{ myMessage }}</span>'
+});
+new Vue({
+	el:'#demo4',
+	data:{
+		message:''
+	}
 });
 </script>
 </body>
