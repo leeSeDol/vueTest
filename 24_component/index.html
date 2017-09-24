@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script src="../vue.js"></script>
+</head>
+<body>
+<div id="demo1">
+	<my-component>
+		<child message="slider"></child>	
+	</my-component>
+</div>
+	
+<div id="demo2">
+	<table>
+		<tr is="my-com"></tr>
+	</table>
+</div>
+
+<div id="demo3">
+	<simple-counter></simple-counter>
+	<simple-counter></simple-counter>
+	<simple-counter></simple-counter>
+</div>
+
+<div id="demo4">
+	
+</div>
+<script>
+//demo1	
+var Child = {
+	template:'<div>A custom component!</div>'
+};
+new Vue({
+	el:'#demo1',
+	components:{
+		'my-component':Child
+	}
+});
+
+//demo2
+var com = {
+	template:'<tr><td> a td </td></tr>'
+};
+new Vue({
+	el:'#demo2',
+	components:{
+		'my-com':com
+	}
+});
+
+//demo3
+Vue.component('simple-counter',{
+	template:'<button v-on:click=" counter += 1 ">{{counter}}</button>',
+	data:function(){
+		return {
+			counter : 0
+		}
+	}
+});
+new Vue({
+	el:'#demo3'
+});
+
+//demo4
+Vue.component('child',{
+	props:['message'],
+	template:'<span>{{ message }}</span>'
+});
+</script>
+</body>
+</html>
