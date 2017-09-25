@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Props</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="demo1">
+	<son my-message = "I'm a son"></son>
+</div>
+
+<div id="demo2">
+	<com2 initial-counter="baiBai" ></com2>
+</div>
+
+<div id="demo3">
+	<com3 size="BAIJIAHAO"></com3>
+</div>
+
+<div id="counter-event-example">
+	<p>{{ total }}</p>
+	<button-counter v-on:increment="incrementTotal"></button-counter>
+	<button-counter v-on:increment="incrementTotal"></button-counter>
+</div>
+<script type="text/javascript">
+
+Vue.component('son',{
+	props:['myMessage'],
+	template:'<span>{{myMessage}}</span>'
+});
+
+var demo1 = new Vue({
+	el:'#demo1',
+	components:['son']
+});
+
+Vue.component('com2',{
+	props:[ 'initialCounter' ],
+	data:function(){
+		return {
+			counter: this.initialCounter
+		};
+	},
+	template:'<div class="com2">{{ this.counter }}</div>'
+});
+var demo2 = new Vue({
+	el:'#demo2'
+});
+
+Vue.component('com3',{
+	props:['size'],
+	computed:{
+		normalizedSize:function(){
+			return this.size.toLowerCase();
+		}
+	},
+	template:'<div class="com3" >{{ this.size }} {{this.normalizedSize}}</div>'
+});
+var demo3 = new Vue({
+	el:'#demo3'
+});
+
+
+Vue.component('button-counter',{
+	template:'<button v-on:click="incrementCounter">{{ counter }}</button>',
+	data:function(){
+		return{
+			counter:0
+		};
+	},
+	methods:{
+		incrementCounter:function(){
+			this.counter += 1;
+			this.$emit('increment');
+		}
+	}
+});
+var demo4 = new Vue({
+	el:'#counter-event-example',
+	data:{
+		total:0
+	},
+	methods:{
+		incrementTotal:function(){
+			this.total+=1;
+		}
+	}
+});
+
+</script>
+</body>
+</html>
