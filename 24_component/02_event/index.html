@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<currency-input v-model="price"></currency-input>
+
+
+<script>
+	
+Vue.component('currency-input',{
+	template:'\
+		<span>\
+			$\
+			<input\
+				ref="input"\
+				v-bind:value="value"\
+				v-on:input="updateValue($event.target.value)"\
+			>\
+		</span>\
+	',
+	props:['']
+});
+</script>
+</body>
+</html>
