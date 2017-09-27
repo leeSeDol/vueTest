@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="demo1">
-	<son my-message = "I'm a son"></son>
+	<son v-on:click.native="alertThis" my-message = "I'm a son"></son>
 </div>
 
 <div id="demo2">
@@ -20,9 +20,15 @@
 
 <div id="counter-event-example">
 	<p>{{ total }}</p>
-	<button-counter v-on:increment="incrementTotal"></button-counter>
+	<button-counter v-on:hover.native="alertThis" v-on:increment="incrementTotal" ></button-counter>
 	<button-counter v-on:increment="incrementTotal"></button-counter>
 </div>
+
+<div id="demo5">
+	<comp :foo.sync="bar"></comp>
+</div>
+
+
 <script type="text/javascript">
 
 Vue.component('son',{
@@ -32,7 +38,12 @@ Vue.component('son',{
 
 var demo1 = new Vue({
 	el:'#demo1',
-	components:['son']
+	components:['son'],
+	methods:{
+		alertThis:function(){
+			alert("this");
+		}		
+	}
 });
 
 Vue.component('com2',{
@@ -84,9 +95,35 @@ var demo4 = new Vue({
 	methods:{
 		incrementTotal:function(){
 			this.total+=1;
+		},
+		alertThis:function(){
+			alert("button");
 		}
 	}
 });
+
+
+Vue.component('comp',{
+	template:'<input></input> ',
+	data:function(){
+		return {
+			foo:'bar'
+		}
+	},
+	methods:{
+		changeValue:function(){
+			this.$emit('update:foo','bar2');
+		}
+	}
+});
+var demo5 = new Vue({
+	el:'#demo5',
+	data:{
+		bar:'bar'
+	}
+});
+
+
 
 </script>
 </body>
